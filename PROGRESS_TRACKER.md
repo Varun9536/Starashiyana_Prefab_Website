@@ -376,9 +376,15 @@ Last updated: 2026-08-25
   becomes worth adding here too.
 - Provide real social media profile URLs (LinkedIn/Facebook/Instagram/
   YouTube, whichever exist) to add to `siteConfig.socialLinks`.
-- `app/icon.png` is the full rectangular brand logo (1400×1144), not a
-  purpose-cut square mark — works as a favicon but a dedicated square icon
-  would render more cleanly at 16×16.
+- ~~`app/icon.png` full-rectangle logo~~ — resolved 2026-08-25: used `sharp`
+  (already a transitive dependency of `next`) to programmatically crop just
+  the star+building mark out of `logo.png` (excluding the "STARASHIYANA
+  PREFAB LLP" wordmark below it — found the icon/text boundary by scanning
+  for the empty pixel-row gap between them), trimmed the transparent margin,
+  and re-composited it centered on a padded transparent square canvas
+  (512×512). This is also what shows next to the site in Google search
+  results, not just the browser tab, so worth doing properly rather than
+  squashing the full wordmark logo into a tiny square.
 - No dedicated 1200×630 Open Graph image exists yet; the logo is used as a
   fallback share image. Swap `openGraph.images` / `twitter.images` in
   `src/app/layout.tsx` once one is designed.
