@@ -189,6 +189,39 @@ Last updated: 2026-08-25
       #services #structure #process #contact #why #faq #profile #top`) is
       back on the one page.
 
+- [x] 2026-08-25 — Pushed to GitHub (`https://github.com/Varun9536/Starashiyana_Prefab_Website`,
+      `main` branch) and added production deployment tooling for the Linux
+      VPS at `starashiyanaprefab.com`:
+      - `next.config.ts` — `output: "standalone"` (traced minimal runtime,
+        no `node_modules` install needed in the final image) + an
+        `X-Accel-Buffering: no` response header so nginx doesn't buffer
+        streamed responses.
+      - `Dockerfile` — 3-stage build (`deps` → `builder` → `runner`) on
+        `node:22-alpine`, non-root `nextjs` user, final image only contains
+        the standalone server + `.next/static` (no source, no dev deps).
+      - `.dockerignore`, `docker-compose.yml` (binds the app to
+        `127.0.0.1:3000` only — never exposed directly to the internet —
+        with a `wget`-based healthcheck), `.env.example`.
+      - `deploy/nginx/starashiyanaprefab.com.conf` — HTTP→HTTPS redirect,
+        `www`→apex redirect, Certbot-ready `ssl_certificate` paths, gzip,
+        immutable caching for `/_next/static/`, `proxy_buffering off` to
+        match the header above.
+      - `DEPLOYMENT.md` — full VPS runbook: one-time server setup, DNS,
+        `docker compose build/up`, installing the nginx config, issuing the
+        cert with `certbot --nginx`, verification, redeploy and rollback.
+      - `siteConfig.url` now defaults to the real `https://starashiyanaprefab.com`
+        instead of a placeholder (closes a follow-up flagged earlier).
+      **Verified locally** (no Docker available in this environment): ran
+      `npm run build` with `output: "standalone"` enabled, then ran the exact
+      traced `node .next/standalone/server.js` the Dockerfile's `CMD` runs —
+      confirmed `/`, `/sitemap.xml`, `/robots.txt`, `/icon.png` all return
+      `200`, an unknown path returns a real `404`, and the
+      `X-Accel-Buffering: no` header is present. **Not verified**: the actual
+      `docker build`/`docker compose up` (Docker isn't installed in this
+      session's environment) — run `docker compose build && docker compose up -d`
+      once on the VPS (or any machine with Docker) as the first real test
+      before relying on it in production.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - `app/icon.png` is the full rectangular brand logo (1400×1144), not a
   purpose-cut square mark — works as a favicon but a dedicated square icon
@@ -196,9 +229,8 @@ Last updated: 2026-08-25
 - No dedicated 1200×630 Open Graph image exists yet; the logo is used as a
   fallback share image. Swap `openGraph.images` / `twitter.images` in
   `src/app/layout.tsx` once one is designed.
-- `siteConfig.url` in `src/config/site.ts` falls back to a placeholder domain
-  until `NEXT_PUBLIC_SITE_URL` is set for the real deployment — update before
-  going live so canonical/OG URLs are correct.
+- ~~`siteConfig.url` placeholder~~ — resolved 2026-08-25, now defaults to
+  `https://starashiyanaprefab.com`.
 
 ## Notes / decisions log
 - Only images actually referenced by `index.html` are migrated; several unused
