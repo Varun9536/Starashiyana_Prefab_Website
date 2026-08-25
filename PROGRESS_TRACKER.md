@@ -222,6 +222,24 @@ Last updated: 2026-08-25
       once on the VPS (or any machine with Docker) as the first real test
       before relying on it in production.
 
+- [x] 2026-08-25 — Nginx config had 4 `server{}` blocks (separate www-redirect
+      blocks for HTTP and HTTPS) — client found this confusing ("itne saare
+      config ka kya karu"). Simplified `deploy/nginx/starashiyanaprefab.com.conf`
+      down to the practical minimum of 2 blocks: one on port 80 that redirects
+      everything to HTTPS (also serves the Certbot ACME challenge), one on
+      port 443 that serves the site and redirects `www` → apex internally via
+      an `if ($host = ...)` check. Same one file, same install steps.
+      Also: the client's VPS already had ports 3000–3004 in use by other
+      services, so `docker-compose.yml`'s host-side port was moved to
+      `127.0.0.1:3005:3000` (container-internal port is unaffected, still
+      3000 — see `Dockerfile`'s `EXPOSE`/`PORT`). Updated every place that
+      referenced the host-published port to match: the nginx config's two
+      `proxy_pass` directives, `DEPLOYMENT.md`'s verification `curl` and
+      firewall comment. Left alone (correctly still `3000`): the Dockerfile's
+      `ENV PORT`/`EXPOSE` (container-internal), the compose healthcheck (runs
+      **inside** the container's own network namespace), and `README.md`'s
+      mention of `localhost:3000` (that's `npm run dev`, unrelated to Docker).
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - `app/icon.png` is the full rectangular brand logo (1400×1144), not a
   purpose-cut square mark — works as a favicon but a dedicated square icon

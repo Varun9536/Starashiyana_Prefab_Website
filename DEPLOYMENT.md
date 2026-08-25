@@ -1,6 +1,7 @@
 # Deploying to the VPS (starashiyanaprefab.com)
 
-The app runs in Docker on the VPS, bound to `127.0.0.1:3000` only. Nginx on
+The app runs in Docker on the VPS, bound to `127.0.0.1:3005` only (port 3000
+was already taken on this VPS — see `docker-compose.yml`). Nginx on
 the host is the only thing exposed to the internet — it terminates TLS and
 reverse-proxies to the container. This is the setup Next.js itself recommends
 for self-hosting (see `PROGRESS_TRACKER.md` for why).
@@ -16,7 +17,7 @@ sudo usermod -aG docker $USER   # log out/in after this
 sudo apt update
 sudo apt install -y nginx certbot python3-certbot-nginx
 
-# Firewall — only 22/80/443 exposed; 3000 stays internal
+# Firewall — only 22/80/443 exposed; 3005 stays internal
 sudo ufw allow OpenSSH
 sudo ufw allow "Nginx Full"
 sudo ufw enable
@@ -39,7 +40,7 @@ cp .env.example .env   # edit if the domain ever changes
 docker compose build
 docker compose up -d
 docker compose ps        # should show "healthy" after ~10s
-curl -I http://127.0.0.1:3000
+curl -I http://127.0.0.1:3005
 ```
 
 ## 3. Wire up nginx

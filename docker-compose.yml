@@ -11,7 +11,9 @@ services:
     environment:
       NODE_ENV: production
     # Bound to localhost only — nginx on the host is the public-facing edge
-    # (TLS termination + reverse proxy). Never publish 3000 directly to 0.0.0.0.
+    # (TLS termination + reverse proxy). Never bind this to 0.0.0.0.
+    # Host side is 3005 (3000-3004 were already taken on this VPS); the
+    # container's internal port stays 3000 either way (see Dockerfile).
     ports:
       - "127.0.0.1:3005:3000"
     healthcheck:
