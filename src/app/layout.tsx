@@ -27,10 +27,15 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+// Leads with the category/search term rather than the brand name — most
+// searches for a growing company are generic ("PEB manufacturer in India"),
+// not branded, and Google gives real weight to what's early in the title.
+const PRIMARY_TITLE = `Pre-Engineered Steel Building (PEB) Manufacturer in India | ${siteConfig.name}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} | Pre-Engineered Steel Buildings, Built on Experience`,
+    default: PRIMARY_TITLE,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
@@ -44,44 +49,76 @@ export const metadata: Metadata = {
     locale: siteConfig.locale,
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.name} | Pre-Engineered Steel Buildings, Built on Experience`,
+    title: PRIMARY_TITLE,
     description: siteConfig.description,
     images: [{ url: "/icon.png" }],
   },
   twitter: {
     card: "summary",
-    title: `${siteConfig.name} | Pre-Engineered Steel Buildings`,
+    title: PRIMARY_TITLE,
     description: siteConfig.description,
     images: ["/icon.png"],
   },
 };
 
+const logoUrl = `${siteConfig.url}/icon.png`;
+
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: siteConfig.name,
+  legalName: siteConfig.name,
+  url: siteConfig.url,
+  logo: logoUrl,
+  image: logoUrl,
   description:
     "Pre-Engineered Building (PEB) manufacturer offering design, fabrication and erection of industrial, warehouse and commercial steel structures across India.",
   email: siteConfig.contact.email,
+  telephone: siteConfig.contact.phoneHref,
   areaServed: "India",
   address: {
     "@type": "PostalAddress",
     ...siteConfig.manufacturingUnitStructured,
   },
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "sales",
+      telephone: siteConfig.contact.phoneHref,
+      email: siteConfig.contact.email,
+      areaServed: "IN",
+      availableLanguage: ["en", "hi"],
+    },
+  ],
   founders: siteConfig.founders.map((founder) => ({
     "@type": "Person",
     name: founder.name,
   })),
+  ...(siteConfig.socialLinks.length > 0 ? { sameAs: siteConfig.socialLinks } : {}),
 };
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteConfig.name,
+  url: siteConfig.url,
+};
+
+function JsonLd({ data }: { data: object }) {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
+    />
+  );
+}
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c") }}
-        />
+        <JsonLd data={organizationJsonLd} />
+        <JsonLd data={websiteJsonLd} />
         <Header />
         <main>{children}</main>
         <Footer />

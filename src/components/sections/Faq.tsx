@@ -8,11 +8,28 @@ import { cx } from "@/lib/utils";
 import { faqItems } from "@/data/faq";
 import styles from "./Faq.module.css";
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
+
 export function Faq() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section className="section section-cream" id="faq">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, "\\u003c") }}
+      />
       <Container>
         <Reveal>
           <SectionHeading eyebrow="FAQs" heading="Common questions before you start a project" />

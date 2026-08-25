@@ -8,16 +8,26 @@ export const siteConfig = {
   shortName: "Starashiyana Prefab",
   tagline: "Built on experience. Framed in steel.",
   description:
-    "Starashiyana Prefab LLP designs, fabricates and erects Pre-Engineered Steel Buildings (PEB) for industrial, warehouse, commercial and institutional projects across India. Single-source accountability from concept to handover.",
+    "Starashiyana Prefab LLP designs, fabricates and erects Pre-Engineered Steel Buildings (PEB) for industrial, warehouse, commercial and institutional projects across India, with our own manufacturing plant in Dharuhera, Haryana (Delhi NCR). Single-source accountability from concept to handover.",
   keywords: [
     "PEB manufacturer India",
-    "pre-engineered steel building",
-    "industrial shed",
-    "warehouse construction",
+    "pre-engineered steel building company",
+    "pre-engineered building manufacturer",
+    "industrial shed manufacturer",
+    "steel warehouse construction company",
     "steel factory building",
+    "PEB manufacturer Haryana",
+    "steel building manufacturer Delhi NCR",
     "Dharuhera PEB",
-    "mezzanine steel structure",
+    "mezzanine floor manufacturer",
+    "cold storage steel building",
   ],
+  // Social profile URLs for the `sameAs` field in Organization JSON-LD — this
+  // is a real, verifiable signal Google uses to link a search result to the
+  // right entity (and, longer-term, to the Knowledge Panel). Add real URLs
+  // here once the profiles exist; leave empty rather than guessing at ones
+  // that may not exist.
+  socialLinks: [] as string[],
   // Override via NEXT_PUBLIC_SITE_URL (set at build time) for staging/preview deploys.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://starashiyanaprefab.com",
   locale: "en_IN",

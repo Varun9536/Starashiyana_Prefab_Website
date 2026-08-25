@@ -272,7 +272,55 @@ Last updated: 2026-08-25
       `@keyframes` by name from inside a `.module.css` file in this project —
       declare it locally in that same file instead.
 
+- [x] 2026-08-25 — "Enterprise-grade" SEO pass, thinking from how a real buyer
+      actually searches (branded vs. generic vs. local intent) rather than
+      just re-listing what Search Console wants:
+      - **Title reworded to lead with the category term**: `Pre-Engineered
+        Steel Building (PEB) Manufacturer in India | Starashiyana Prefab LLP`
+        (was brand-first). Most searches for a growing company are generic
+        ("PEB manufacturer in India"), not branded — leading with the
+        searched phrase matters more than brand-first phrasing here.
+      - `siteConfig.description` and `keywords` tightened to explicitly
+        include location terms (`Dharuhera, Haryana (Delhi NCR)`,
+        "PEB manufacturer Haryana", "steel building manufacturer Delhi NCR")
+        — local/regional queries are far less competitive than "PEB
+        manufacturer India" and convert better for a company with one plant.
+      - **Organization JSON-LD enriched** (`src/app/layout.tsx`): added
+        `url`, `logo`/`image` (reusing the already-existing `/icon.png`),
+        `telephone`, and a `contactPoint` (sales, phone+email, `en`/`hi`).
+        Added `siteConfig.socialLinks` (currently empty — real LinkedIn/
+        Facebook/Instagram URLs go here for the `sameAs` field, which is a
+        genuine signal Google uses to connect a result to the right entity —
+        **left empty rather than guessing at URLs that may not exist**; ask
+        the client for these and fill them in).
+      - **New `WebSite` JSON-LD** — establishes the site as a distinct
+        indexable entity (name + url), a small but standard addition.
+      - **New `FAQPage` JSON-LD** (`Faq.tsx`, generated from the existing
+        `faqItems` data — no content duplicated) — the single highest-value
+        addition here: this can make Google show the FAQ questions as
+        expandable rich results directly in search, which is exactly the
+        kind of "more stuff under the company name" the client was asking
+        about that on-page markup can actually influence.
+      Deliberately **did not** change the JSON-LD `@type` to `LocalBusiness`/
+      `GeneralContractor` — that unlocks map-pack-style results but wants
+      confirmed opening hours and geo-coordinates, and the actual dominant
+      lever for that "map card" look is a **Google Business Profile**
+      listing (external, not code) — see follow-ups below.
+      Verified in rendered HTML: new title present, exactly 3 real JSON-LD
+      `<script>` tags in the DOM (Organization, WebSite, FAQPage — checked
+      against the RSC flight-payload duplication issue noted earlier in this
+      file), `contactPoint` and `logo`/`telephone` fields present and correct.
+      Build + lint clean.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
+- **Set up a Google Business Profile** (business.google.com) — this, not
+  on-page schema, is what actually produces the "knowledge panel"/map-card
+  result when someone searches the company name. Use the exact same name,
+  address and phone number as `src/config/site.ts` (NAP consistency matters).
+  Once that exists, `LocalBusiness` schema with real hours/geo-coordinates
+  becomes worth adding here too.
+- Provide real social media profile URLs (LinkedIn/Facebook/Instagram/
+  YouTube, whichever exist) to add to `siteConfig.socialLinks`.
 - `app/icon.png` is the full rectangular brand logo (1400×1144), not a
   purpose-cut square mark — works as a favicon but a dedicated square icon
   would render more cleanly at 16×16.
