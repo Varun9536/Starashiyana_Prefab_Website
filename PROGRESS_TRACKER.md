@@ -7,6 +7,20 @@ Last updated: 2026-08-25
 
 ## Status: DONE — all 8 phases complete, build/lint clean, spot-verified against the source
 
+## Pending decisions (client asked to hold off, not forgotten)
+- [ ] **Single-page vs. a few dedicated SEO landing pages.** Real
+      hub-and-spoke topical SEO (separate pages for "cold storage steel
+      building", "industrial shed manufacturer", "mezzanine floor
+      manufacturer", "PEB manufacturer Haryana", etc.) needs each keyword
+      cluster to have its own dedicated page — a single page can only rank
+      strongly for 1–2 broad terms. Proposed middle ground: keep the
+      homepage exactly as-is (no UX/nav change, avoids repeating the earlier
+      multi-page revert) and add a handful of thin, search-only landing
+      pages not in the main nav. Client said "abhi rehne dete hai, pending
+      mein daal do" (2026-08-25) — revisit before doing the topical
+      keyword/hub-and-spoke map or the local SEO execution plan, since both
+      depend on this call.
+
 ## Done
 - [x] Phase 0 — `create-next-app` scaffold (TS, App Router, `src/` dir, ESLint,
       no Tailwind), git repo initialized by the CLI. Confirmed against the
