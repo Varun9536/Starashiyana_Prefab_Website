@@ -1,0 +1,26 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heading {
+  color: var(--color-text-on-dark);
+  font-size: var(--fs-h3);
+  margin: 18px 0 14px;
+}
+
+.column p {
+  color: var(--color-text-on-dark-muted);
+  margin-bottom: 16px;
+}
+
+.column p:last-child {
+  margin-bottom: 0;
+}

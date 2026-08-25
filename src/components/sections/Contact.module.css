@@ -1,0 +1,61 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--color-border);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.info {
+  background: var(--color-surface-dark);
+  color: var(--color-text-on-dark);
+  padding: 56px 46px;
+}
+
+.info h2 {
+  color: var(--color-surface);
+  margin: 16px 0 18px;
+  font-size: 1.9rem;
+}
+
+.info > p {
+  color: rgba(245, 240, 228, 0.7);
+}
+
+.detail {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-top: 28px;
+}
+
+.detailLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(245, 240, 228, 0.5);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+
+.detailValue {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  margin-top: 3px;
+}
+
+.detailValue a[href^="mailto"],
+.detailValue a[href^="https://wa.me"] {
+  border-bottom: 1px solid rgba(245, 240, 228, 0.4);
+}
+
+@media (max-width: 900px) {
+  .info,
+  .form {
+    padding: 46px 28px;
+  }
+}

@@ -1,0 +1,36 @@
+.wrap {
+  position: fixed;
+  right: 26px;
+  bottom: 26px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fab {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-fast);
+}
+
+.fab:hover {
+  transform: scale(1.08);
+}
+
+.whatsapp {
+  background: #3d7a4f;
+}
+
+.call {
+  background: var(--color-primary);
+}
+
+.email {
+  background: var(--color-surface-dark);
+}

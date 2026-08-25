@@ -1,0 +1,35 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--color-border);
+  text-align: center;
+}
+
+.card {
+  background: var(--color-surface);
+  padding: 36px 20px;
+}
+
+.icon {
+  margin-bottom: 16px;
+  color: var(--color-secondary);
+  display: flex;
+  justify-content: center;
+}
+
+.card h5 {
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,0 +1,101 @@
+/**
+ * Raw design tokens extracted from the original Starashiyana Prefab HTML site.
+ * These are the only place literal color/space/shadow/etc. values should live.
+ * Everything else (globals.css, CSS Modules) consumes these via var(--token) —
+ * never hardcode a hex, px spacing, or shadow value outside this file.
+ */
+:root {
+  /* ---- Brand palette ---- */
+  --charcoal: #2b2b2b;
+  --charcoal-2: #3a3a3a;
+  --olive: #5c6b3f;
+  --olive-light: #7d8f57;
+  --olive-dark: #454f2e;
+  --cream: #f5f0e4;
+  --cream-2: #ece4d1;
+  --rust: #b5652f;
+  --rust-light: #d17f45;
+  --paper: #faf7ef;
+  --ink: #232320;
+  --footer-tan: #d8cdb8;
+
+  /* ---- Neutral/alpha helpers ---- */
+  --line: rgba(43, 43, 43, 0.14);
+  --overlay-charcoal-strong: rgba(43, 43, 43, 0.97);
+  --overlay-charcoal-soft: rgba(43, 43, 43, 0.55);
+
+  /* ---- Typography ---- */
+  --font-display: var(--font-oswald), "Oswald", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "JetBrains Mono", monospace;
+
+  --fs-eyebrow: 0.72rem;
+  --fs-sm: 0.85rem;
+  --fs-base: 1rem;
+  --fs-lead: 1.12rem;
+  --fs-h3: 1.3rem;
+  --fs-h2: clamp(1.9rem, 3.6vw, 2.8rem);
+  --fs-h1: clamp(2.6rem, 6vw, 4.6rem);
+
+  --lh-tight: 1.05;
+  --lh-body: 1.6;
+
+  --tracking-eyebrow: 0.22em;
+  --tracking-label: 0.08em;
+  --tracking-wide: 0.05em;
+
+  /* ---- Radius & signature shape ---- */
+  --radius-steel: 2px;
+  --clip-btn: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+  --clip-badge: polygon(
+    8px 0,
+    100% 0,
+    100% calc(100% - 8px),
+    calc(100% - 8px) 100%,
+    0 100%,
+    0 8px
+  );
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 10px 25px -8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 20px 50px -20px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 14px 28px rgba(0, 0, 0, 0.2);
+
+  /* ---- Layout ---- */
+  --container-max-width: 1240px;
+  --container-padding-inline: 28px;
+  --section-padding-block: 110px;
+  --section-padding-block-tablet: 76px;
+  --section-padding-block-mobile: 60px;
+
+  /* ---- Spacing scale ---- */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+
+  /* ---- Motion ---- */
+  --transition-fast: 0.2s ease;
+  --transition-base: 0.25s ease;
+  --transition-slow: 0.7s ease;
+  --duration-camera: 20s;
+  --duration-belt: 38s;
+
+  /* ---- Breakpoints (reference only — media queries hardcode these px values
+     since CSS custom properties cannot be interpolated into @media) ---- */
+  --bp-sm: 560px;
+  --bp-md: 760px;
+  --bp-lg: 900px;
+  --bp-xl: 980px;
+}

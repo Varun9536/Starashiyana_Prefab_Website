@@ -1,0 +1,37 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.heading {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin: 16px 0 18px;
+}
+
+.copy p {
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+.copy p:last-child {
+  margin-bottom: 0;
+}
+
+.visual {
+  position: relative;
+  background: var(--charcoal);
+  aspect-ratio: 4 / 3;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 8% 100%, 0 90%);
+  overflow: hidden;
+}
+
+.visual img {
+  object-fit: cover;
+}
