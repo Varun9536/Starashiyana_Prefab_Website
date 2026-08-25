@@ -1,0 +1,22 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-https://starashiyanaprefab.com}
+    image: starashiyana-prefab-website:latest
+    container_name: starashiyana-prefab-website
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+    # Bound to localhost only — nginx on the host is the public-facing edge
+    # (TLS termination + reverse proxy). Never publish 3000 directly to 0.0.0.0.
+    ports:
+      - "127.0.0.1:3000:3000"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://127.0.0.1:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

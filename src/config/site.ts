@@ -18,8 +18,8 @@ export const siteConfig = {
     "Dharuhera PEB",
     "mezzanine steel structure",
   ],
-  // Falls back to a placeholder until a production domain is assigned via env.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.starashiyanaprefab.com",
+  // Override via NEXT_PUBLIC_SITE_URL (set at build time) for staging/preview deploys.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://starashiyanaprefab.com",
   locale: "en_IN",
   contact: {
     email: "starashiyana.prefab@gmail.com",

@@ -109,6 +109,86 @@ Last updated: 2026-08-25
       (`MobileMenuDrawer` in `MobileMenu.tsx`) so mobile visitors can reach it
       too.
 
+- [x] 2026-08-25 — Client wanted the single-page site split into real, separate
+      pages ("professional", not like sections were chopped apart) and wanted
+      confirmation that Next.js's actual routing/SSR features were in play,
+      not just a re-skinned single page. Restructured into a 6-route site:
+      - `/` — Hero, `About` (`teaser` variant — new prop, shows only the first
+        paragraph + a "Read our full story →" link instead of duplicating all
+        3 paragraphs), `WhyUs`, `Services`, new `ExploreMore` cross-link band,
+        new `CtaBanner`.
+      - `/about` — `About` (full) + `VisionMission` + `WhyUs`.
+      - `/services` — `Services` + `PebStructure` (tech/specs/framing/mezzanine)
+        + `Certifications`.
+      - `/manufacturing` — `Machinery` + `ManufacturingProcess` +
+        `QualityAssurance` + `AssemblyShowcase` + `Facility` + `Sustainability`.
+      - `/industries` — `Sectors` + `CtaBanner`.
+      - `/contact` — `Faq` + `Contact` (its own heading was removed here since
+        the new `PageHero` already supplies the page's `h1` — was literally
+        duplicate text otherwise).
+      Every interior page opens with the new `components/layout/PageHero.tsx`
+      banner (eyebrow + `h1` + description) so each route reads as its own
+      "chapter" instead of a bare content section — this is the piece that
+      makes the split feel deliberate rather than like a page got cut apart.
+      Verified exactly one `<h1>` per route.
+      **Next.js features now actually in use, not just RSC defaults**:
+      file-based routing (6 real segments), `next/link` everywhere internal
+      (`Button`, `Navbar`, `MobileMenu`, `Footer`, `Header` logo) for
+      client-side transitions + prefetch instead of full page reloads,
+      `usePathname()` for active-nav-link state, per-route `generateMetadata`-
+      style static `metadata` exports (unique title/description/canonical per
+      page — title template `%s | Starashiyana Prefab LLP` resolves
+      correctly), `app/not-found.tsx`, `app/sitemap.ts`, `app/robots.ts` file
+      conventions, and the shared root `layout.tsx` rendering `Header`/
+      `Footer`/`FloatingActions` once instead of per page. Every route still
+      builds fully static (`npm run build` shows all 9 routes, incl.
+      `sitemap.xml`/`robots.txt`, as `○ Static` — prerendered at build time,
+      which for a marketing site with no per-request data is strictly better
+      than classic per-request SSR, not a downgrade from it).
+      Also fixed in the process: `Header`'s logo now links via `next/link`
+      to `/` instead of a `#top` anchor that no longer exists on other pages;
+      `Hero`'s CTAs point to `/contact` and `/contact#profile`; footer links
+      repointed to real routes (`/about#why`, `/services#services`,
+      `/services#mezzanine` — added `id="mezzanine"` to `PebStructure`);
+      `Services` page banner copy reworded so it doesn't near-duplicate
+      `Services`' own `h2`. Build + lint clean; spot-checked all 6 pages for
+      correct titles, one `h1` each, correct active nav-link markers, and
+      that `/does-not-exist` returns a real HTTP 404 with the branded page.
+
+- [x] 2026-08-25 — **Reverted the multi-page split above.** Client decided to
+      keep the site single-page after all, but wanted to keep whatever SEO/
+      Next.js benefits came with that attempt. Restored via
+      `git checkout 11cc899 -- <files>` (the client's own `v1` commit, made
+      right after the header/mobile-CTA fixes and right before the multi-page
+      work) for every file the split had touched: `app/page.tsx`, `Header`,
+      `Footer`, `Navbar` (+css), `MobileMenu` (+css), `About` (+css),
+      `Contact` (+css), `Hero`, `PebStructure`, `Button`, `config/navigation.ts`.
+      Deleted the route folders and the multi-page-only glue components
+      (`about/`, `services/`, `manufacturing/`, `industries/`, `contact/`,
+      `PageHero`, `CtaBanner`, `ExploreMore`).
+      **Important clarification for the client**: the real SEO/SSR wins were
+      never dependent on being multi-page — they were already in place back
+      in Phase 5/8 above, on the single page: full `Metadata` (title,
+      description, keywords, OpenGraph, Twitter, canonical), the Organization
+      JSON-LD, a real favicon, semantic HTML, and — for "SSR" — the entire
+      site rendering as **React Server Components, statically prerendered at
+      build time** (Next.js's recommended default, and strictly better than
+      classic per-request SSR for a page with no per-request data). None of
+      that was undone by this revert.
+      What *did* only make sense for a multi-page site and was correctly
+      removed with it: per-route unique metadata, `next/link` client-side
+      transitions between pages, and `usePathname()` active-nav-link state.
+      What was multi-page-*adjacent* but genuinely independent of page count,
+      and was **kept**: `app/not-found.tsx` (branded 404, real HTTP 404
+      status), `app/robots.ts`, `app/sitemap.ts` (trimmed back down to list
+      just the one `/` URL). `next build` confirms 5 static routes: `/`,
+      `/_not-found`, `/icon.png`, `/robots.txt`, `/sitemap.xml`. Build + lint
+      clean; re-verified the header is still `position: relative` (the
+      earlier fixed-header fix survived the revert, since it was part of the
+      `v1` commit being restored to) and every original anchor id (`#about
+      #services #structure #process #contact #why #faq #profile #top`) is
+      back on the one page.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - `app/icon.png` is the full rectangular brand logo (1400×1144), not a
   purpose-cut square mark — works as a favicon but a dedicated square icon
