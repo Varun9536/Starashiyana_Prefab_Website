@@ -1,10 +1,15 @@
 /**
- * Semantic theme layer — maps raw tokens (variables.css) to purpose-based names,
- * and hosts the small set of shared keyframes reused by several section
- * components (photo "camera drift", scroll reveal, belt/marquee motion).
+ * Semantic theme layer — maps raw tokens (variables.css) to purpose-based names.
  *
  * To re-theme the whole site, change variables.css. This file should rarely
- * need edits — it only re-labels tokens semantically and defines animation.
+ * need edits — it only re-labels tokens semantically.
+ *
+ * Note: section-specific `@keyframes` (camera drift, belt marquee, etc.) live
+ * next to the component that uses them, not here — Next.js's CSS Modules
+ * (Turbopack/Lightning CSS) scope an `animation:` name to the file it's
+ * declared in, and a keyframe declared in *this* global file doesn't reliably
+ * match a same-named reference from a `.module.css` file. Keeping the
+ * `@keyframes` co-located with its one caller sidesteps that entirely.
  */
 :root {
   /* Surfaces */
@@ -32,97 +37,6 @@
   /* Structure */
   --color-border: var(--line);
   --color-border-on-dark: rgba(245, 240, 228, 0.15);
-}
-
-/* ============ SHARED KEYFRAMES ============ */
-/* Slow alternating scale+pan "camera drift" applied to full-bleed photography.
-   Each section uses slightly different end-transforms to avoid a mechanical,
-   synchronized feel when several are visible at once — matching the source. */
-@keyframes factoryCameraDrift {
-  0% {
-    transform: scale(1.02) translate3d(0, 0, 0);
-  }
-  100% {
-    transform: scale(1.09) translate3d(-1.2%, -0.8%, 0);
-  }
-}
-
-@keyframes heroCameraDrift {
-  from {
-    transform: scale(1.03) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.08) translate3d(-1.5%, -0.6%, 0);
-  }
-}
-
-@keyframes assemblyCameraDrift {
-  0% {
-    transform: scale(1.02) translate3d(0, 0, 0);
-  }
-  100% {
-    transform: scale(1.1) translate3d(-1.8%, -0.8%, 0);
-  }
-}
-
-@keyframes lightSweep {
-  0% {
-    left: -25%;
-    opacity: 0;
-  }
-  15% {
-    opacity: 1;
-  }
-  55% {
-    opacity: 0.7;
-  }
-  100% {
-    left: 120%;
-    opacity: 0;
-  }
-}
-
-@keyframes livePulse {
-  50% {
-    transform: scale(1.35);
-    opacity: 0.55;
-  }
-}
-
-@keyframes processBelt {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes photoPulse {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  45%,
-  60% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0;
-  }
-}
-
-@keyframes stageGlow {
-  0%,
-  100% {
-    transform: translateY(0);
-    border-color: rgba(245, 240, 228, 0.18);
-  }
-  50% {
-    transform: translateY(-3px);
-    border-color: rgba(181, 101, 47, 0.62);
-    box-shadow: 0 10px 22px rgba(181, 101, 47, 0.1);
-  }
 }
 
 /* ============ SCROLL REVEAL (used by the Reveal client component) ============ */

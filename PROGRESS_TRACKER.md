@@ -240,6 +240,38 @@ Last updated: 2026-08-25
       **inside** the container's own network namespace), and `README.md`'s
       mention of `localhost:3000` (that's `npm run dev`, unrelated to Docker).
 
+- [x] 2026-08-25 — **Real bug, found by the client in a live browser (not
+      catchable by `curl`/build checks, which is why it slipped through
+      earlier verification):** none of the site's CSS animations were
+      actually running — the manufacturing process reel wasn't scrolling, the
+      hero/assembly "camera drift" photo motion was static, the light sweep
+      and live-pulse dot weren't animating. Root cause: 8 `@keyframes` were
+      defined once in the shared `src/styles/theme.css` and referenced by
+      name (`animation: processBelt ...`) from several component
+      `.module.css` files. Next.js's CSS Modules (Turbopack/Lightning CSS)
+      scope an `animation:` name to the **file it's referenced from** — so
+      `ProcessReel.module.css`'s reference got hashed to
+      `ProcessReel-module__xxx__processBelt`, while the actual `@keyframes`
+      block in the global file stayed named plain `processBelt`. Names never
+      matched, so the browser silently had no matching animation to run.
+      (Tried `:global(processBelt)` in the value position first — Turbopack's
+      CSS Modules doesn't support that syntax there; it leaves the literal
+      text in the output, which is invalid CSS.)
+      **Fix**: since none of these 8 keyframes were actually shared across
+      more than one component file, moved each `@keyframes` out of
+      `theme.css` and into the one `.module.css` file that uses it —
+      `heroCameraDrift`/`factoryCameraDrift`/`lightSweep`/`livePulse` →
+      `Hero.module.css`; `processBelt`/`photoPulse` → `ProcessReel.module.css`;
+      `assemblyCameraDrift`/`stageGlow` → `AssemblyShowcase.module.css`.
+      Same-file declaration+reference is scoped together reliably, so the
+      hashed names now match exactly (verified in the compiled
+      `.next/static/chunks/*.css` — declaration and reference are the
+      identical hashed name for all 8). `theme.css` now only holds semantic
+      color tokens and the `.reveal` scroll-reveal utility.
+      **Lesson for future work in this repo**: never reference a global
+      `@keyframes` by name from inside a `.module.css` file in this project —
+      declare it locally in that same file instead.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - `app/icon.png` is the full rectangular brand logo (1400×1144), not a
   purpose-cut square mark — works as a favicon but a dedicated square icon

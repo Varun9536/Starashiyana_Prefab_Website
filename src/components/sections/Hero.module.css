@@ -1,3 +1,48 @@
+/* Declared locally (not in styles/theme.css) — Next.js's CSS Modules scope an
+   `animation:` name to the file it's declared in, so a same-named global
+   `@keyframes` elsewhere won't reliably match a reference from this file. */
+@keyframes heroCameraDrift {
+  from {
+    transform: scale(1.03) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.08) translate3d(-1.5%, -0.6%, 0);
+  }
+}
+
+@keyframes factoryCameraDrift {
+  0% {
+    transform: scale(1.02) translate3d(0, 0, 0);
+  }
+  100% {
+    transform: scale(1.09) translate3d(-1.2%, -0.8%, 0);
+  }
+}
+
+@keyframes lightSweep {
+  0% {
+    left: -25%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.7;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+@keyframes livePulse {
+  50% {
+    transform: scale(1.35);
+    opacity: 0.55;
+  }
+}
+
 .hero {
   min-height: calc(100vh - 126px);
   display: flex;

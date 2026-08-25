@@ -1,3 +1,27 @@
+/* Declared locally (not in styles/theme.css) — see the note in Hero.module.css. */
+@keyframes processBelt {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes photoPulse {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  45%,
+  60% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0;
+  }
+}
+
 .visual {
   margin-top: 54px;
   position: relative;
