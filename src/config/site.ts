@@ -50,6 +50,13 @@ export const siteConfig = {
     postalCode: "123110",
     addressCountry: "IN",
   },
+  // Genuine corporate parent — used for an honest `parentOrganization` schema
+  // relationship and a single contextual link in the About section. Keep
+  // this as the ONE place this relationship is declared.
+  parentCompany: {
+    name: "Starashiyana Construction Pvt. Ltd.",
+    url: "https://starashiyana.com",
+  },
   founders: [
     {
       name: "Harish Kumar Premi",

@@ -23,10 +23,13 @@ export function About() {
                 of on-ground construction experience and modern, professional management.
               </p>
               <p>
-                Before founding Starashiyana Prefab, our promoters were closely involved with Starashiyana
-                Construction Pvt Ltd, a respected Delhi-based construction firm known for industrial, commercial,
-                hotel, mall and residential projects. That practical, on-site learning now flows into Starashiyana
-                Prefab — as an independent venture with a sharper, PEB-focused vision.
+                Before founding Starashiyana Prefab, our promoters were closely involved with{" "}
+                <a href={siteConfig.parentCompany.url} target="_blank" rel="noopener noreferrer">
+                  {siteConfig.parentCompany.name}
+                </a>
+                , a respected Delhi-based construction firm known for industrial, commercial, hotel, mall and
+                residential projects. That practical, on-site learning now flows into Starashiyana Prefab — as a
+                specialist PEB-focused venture within the same group.
               </p>
               <p>
                 We design, detail, fabricate and erect steel buildings that are faster to build, easier to expand and

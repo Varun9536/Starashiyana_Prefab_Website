@@ -312,6 +312,47 @@ Last updated: 2026-08-25
       file), `contactPoint` and `logo`/`telephone` fields present and correct.
       Build + lint clean.
 
+- [x] 2026-08-25 — Client asked for a full "entity architecture" SEO strategy
+      (parent-company disambiguation, hub-and-spoke topical map, local SEO,
+      cross-domain linking) referencing a "legacy domain" `starashiyana.com`.
+      **This fact changed 3 times over the course of the conversation**
+      (no relation → informal help only → confirmed-by-client genuine parent
+      company with Starashiyana Prefab as a distinct subsidiary brand) before
+      landing on a final answer — worth remembering if this comes up again:
+      confirm the actual corporate relationship (and get it from the client
+      directly, not inferred) before encoding anything about it in schema or
+      before adding any public link to another company's domain, since it
+      names a real third party and is genuinely hard to safely guess at.
+      Fetched `starashiyana.com` (Starashiyana Construction Pvt. Ltd., a
+      general civil contractor — malls/hotels/residential/warehouses,
+      operating since ~2020, registered near-identical Saket address, no
+      existing schema markup, no mention of PEB/Prefab anywhere) to ground
+      the final implementation in what's actually there rather than
+      assumptions. Implemented, once confirmed:
+      - `src/config/site.ts` — new `parentCompany: { name, url }` field, the
+        single place this relationship is declared.
+      - `src/app/layout.tsx` — Organization JSON-LD now includes
+        `parentOrganization` (pointing at the real parent), plus
+        `alternateName`, `disambiguatingDescription` (explicitly states this
+        is a distinct PEB specialist, not the parent's general civil
+        business — the correct schema.org field for exactly this situation),
+        and `knowsAbout` (PEB/steel topical terms, for entity precision).
+      - `About.tsx` — the existing plain-text mention of "Starashiyana
+        Construction Pvt Ltd" is now a real link to `starashiyana.com`.
+        Deliberately **not** `rel="nofollow"` — this is a genuine, accurate,
+        editorial mention of a real corporate relationship, not a paid/
+        untrusted link, so nofollow would work against the actual goal
+        (letting Google use the link to understand the entity relationship).
+      **Deliberately did not**: touch `starashiyana.com` itself (not this
+      project's codebase) or claim a reciprocal link exists there — that's an
+      ask for whoever manages that site, not something achievable from here.
+      **Also still recommended** (from the local-SEO discussion, not yet
+      acted on): use the Dharuhera plant, not the Saket office, as Starashiyana
+      Prefab's primary Google Business Profile location — it's a genuinely
+      distinct physical location (sidesteps the Saket address being
+      near-identical to the parent's), and it's also the more relevant
+      location for PEB-specific local search intent.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card

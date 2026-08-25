@@ -68,11 +68,30 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: siteConfig.name,
   legalName: siteConfig.name,
+  alternateName: siteConfig.shortName,
   url: siteConfig.url,
   logo: logoUrl,
   image: logoUrl,
   description:
     "Pre-Engineered Building (PEB) manufacturer offering design, fabrication and erection of industrial, warehouse and commercial steel structures across India.",
+  // Explicitly distinguishes this specialist PEB entity from its parent
+  // (a general civil contractor) — both for Google and for a human reading
+  // the raw data, so the two are understood as related but distinct.
+  disambiguatingDescription:
+    "An independent Pre-Engineered Building (PEB) and steel structure specialist — not a general civil contractor. Part of the Starashiyana group; a distinct entity from parent company Starashiyana Construction Pvt. Ltd., which handles general civil, commercial and hospitality construction.",
+  knowsAbout: [
+    "Pre-Engineered Buildings",
+    "Steel Structure Fabrication",
+    "Industrial Shed Construction",
+    "Clear-Span Warehousing",
+    "Cold Storage Steel Buildings",
+    "Mezzanine Floor Systems",
+  ],
+  parentOrganization: {
+    "@type": "Organization",
+    name: siteConfig.parentCompany.name,
+    url: siteConfig.parentCompany.url,
+  },
   email: siteConfig.contact.email,
   telephone: siteConfig.contact.phoneHref,
   areaServed: "India",
