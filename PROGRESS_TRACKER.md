@@ -401,6 +401,46 @@ Last updated: 2026-08-25
       timing). This was a real gap worth closing regardless, not just a
       wait-it-out situation.
 
+- [x] 2026-08-26 — Client uploaded a clearer client-provided reference image
+      (`src/assets/images/typesOfShed.jpeg`, 1536×1024) — a single composite
+      collage: one wide construction photo (crane + steel frame) on top, and
+      a 3×2 grid of 6 labeled framing-system photos below (Clear Span, PEB
+      Hybrid, Multi-Span "1", Roof System, Single Slope, PEB Truss — labels
+      matched `data/framingSystems.ts` exactly). Cut it into 7 separate
+      images with `sharp` (pixel-boundary-verified by extracting test crops
+      and visually checking each one before committing to final coordinates
+      — grid cells: top=422/724, left=8/516/1024, 498×172 each; top photo:
+      4,4,1528,412 to trim its thin outer border): the 6 card photos replaced
+      `frame_clearspan.jpg`, `frame_hybrid.jpg`, `frame_multispan.jpg`,
+      `frame_roof.jpg`, `frame_singleslope.jpg`, `frame_truss.jpg` in
+      `src/assets/images/frames/` (used by the Standard Framing Systems grid
+      in `PebStructure.tsx`), and the top wide photo replaced
+      `frame_clean.jpg` in `src/assets/images/assembly/` (used by
+      `AssemblyShowcase.tsx` — "Watch a PEB come together" — both the
+      full-bleed background and the smaller live-erection-view frame).
+      Crops deliberately exclude the composite's own navy label bar / "Max
+      practical width" subtext under each card — the site's own components
+      already render that text from `framingSystems.ts`, so including it in
+      the image would have doubled it up.
+      Per instruction, **originals were not deleted** — renamed with an
+      `_old` suffix in the same folders (`frame_clearspan_old.jpg`, etc.,
+      `frame_clean_old.jpg`) as a recoverable backup rather than removed.
+      `typesOfShed.jpeg` itself is left in place as the raw source (not
+      imported by any component, so it doesn't affect the production
+      bundle — Next.js only bundles what's actually statically imported).
+      No code changes needed — all 7 replacements reused the exact same
+      filenames the existing `import` statements already point to. Build +
+      lint clean.
+      Also found (already done directly on disk, not by me, before this
+      commit): `about/about_factory.jpg` and `hero/factory_bg_clean2.jpg`
+      both replaced with a new high-quality branded factory-interior photo
+      (visible "STARASHIYANA PREFAB LLP" crane signage) — real upgrade over
+      the previous generic stock shots, old versions similarly kept as
+      `about_factoryold.jpg` / `factory_bg_clean2old.jpg`. A third new
+      source image, `fullPlant.jpeg` (dusk exterior shot with truck), was
+      also added but isn't imported/used by any component yet — **asked the
+      client where it should go** rather than guessing a placement.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card
