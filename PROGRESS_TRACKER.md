@@ -380,6 +380,27 @@ Last updated: 2026-08-25
       not just locally. Verified in rendered HTML: both script tags present
       with the correct measurement ID.
 
+- [x] 2026-08-26 — Client reported Google Search results show the default
+      globe/earth icon instead of the site favicon (browser tab favicon
+      already correct). Checked the live site: `/icon.png` returns 200 with
+      the right `<link rel="icon">` tag, `robots.txt` allows everything — no
+      blocker there. Found `/favicon.ico` returned 404 — Google's favicon
+      crawler is known to also check this legacy root path as a fallback
+      signal independent of the `<link rel="icon">` tag. Generated one:
+      resized the square icon mark to 16/32/48px with `sharp`, bundled them
+      into a real multi-resolution `favicon.ico` with `npx png-to-ico` (one-
+      off, not added as a project dependency), placed at `src/app/favicon.ico`
+      (Next.js's `favicon` file convention). Verified locally: `/favicon.ico`
+      now 200s with `image/x-icon`, and both `<link rel="icon">` tags
+      (`favicon.ico` and `icon.png`) render in `<head>`.
+      **This alone will not fix it immediately** — Google caches favicons
+      separately from page content and is well known to take anywhere from a
+      few days to a few weeks to pick up a new/changed one; there's no way to
+      force it beyond requesting reindexing of `/` in Search Console (which
+      nudges a recrawl but still doesn't guarantee the favicon-cache refresh
+      timing). This was a real gap worth closing regardless, not just a
+      wait-it-out situation.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card
