@@ -1,5 +1,5 @@
 import Image from "next/image";
-import factoryGalleryHero from "@/assets/images/hero/factory_gallery_hero.jpg";
+import fullPlant from "@/assets/images/facility/full_plant.jpeg";
 import { Reveal } from "@/components/ui/Reveal";
 import { Container } from "@/components/layout/Container";
 import styles from "./Facility.module.css";
@@ -28,8 +28,8 @@ export function Facility() {
           </Reveal>
           <Reveal className={styles.visual}>
             <Image
-              src={factoryGalleryHero}
-              alt="PEB fabrication floor at the Dharuhera manufacturing facility"
+              src={fullPlant}
+              alt="Exterior view of the Starashiyana Prefab manufacturing facility at dusk"
               fill
               sizes="(max-width: 900px) 100vw, 45vw"
             />

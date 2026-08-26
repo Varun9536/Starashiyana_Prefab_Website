@@ -441,6 +441,18 @@ Last updated: 2026-08-25
       also added but isn't imported/used by any component yet — **asked the
       client where it should go** rather than guessing a placement.
 
+- [x] 2026-08-26 — Placed `fullPlant.jpeg` (moved to
+      `src/assets/images/facility/full_plant.jpeg`, matching the folder's
+      existing naming convention alongside `mezzanine_real.jpg`): used in
+      `Facility.tsx`, replacing the reused `factory_gallery_hero.jpg`. Chose
+      this over Hero/Machinery: the Facility section's copy is specifically
+      about showing off the Dharuhera plant itself ("a working reference for
+      prospective clients... they can walk through") — a full building
+      exterior hero shot fits that narrative better than another interior
+      shot, and it also removes one of the three places `factory_gallery_hero.jpg`
+      was being reused, giving this section a distinct image. Build + lint
+      clean.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card
