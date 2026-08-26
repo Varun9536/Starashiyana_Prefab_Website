@@ -30,6 +30,9 @@ export const siteConfig = {
   socialLinks: [] as string[],
   // Override via NEXT_PUBLIC_SITE_URL (set at build time) for staging/preview deploys.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://starashiyanaprefab.com",
+  // GA4 measurement ID. Override via NEXT_PUBLIC_GA_ID (e.g. leave unset on
+  // staging/preview builds so test traffic doesn't pollute production data).
+  googleAnalyticsId: process.env.NEXT_PUBLIC_GA_ID ?? "G-KN3MMQENDP",
   locale: "en_IN",
   contact: {
     email: "starashiyana.prefab@gmail.com",

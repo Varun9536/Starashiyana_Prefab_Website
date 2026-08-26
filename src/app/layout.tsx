@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/site";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
+import { GoogleAnalytics } from "@/components/layout/GoogleAnalytics";
 import "./globals.css";
 
 const oswald = Oswald({
@@ -136,6 +137,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${oswald.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
       <body>
+        <GoogleAnalytics measurementId={siteConfig.googleAnalyticsId} />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
         <Header />

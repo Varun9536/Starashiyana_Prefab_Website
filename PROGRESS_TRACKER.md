@@ -367,6 +367,19 @@ Last updated: 2026-08-25
       near-identical to the parent's), and it's also the more relevant
       location for PEB-specific local search intent.
 
+- [x] 2026-08-26 — Added Google Analytics (GA4, `G-KN3MMQENDP`). Client pasted
+      the standard `gtag.js` snippet — used `next/script` instead of a raw
+      `<script>` tag (new `components/layout/GoogleAnalytics.tsx`,
+      `strategy="afterInteractive"` so it doesn't block first paint/hydration,
+      per Next.js's own script-loading guide) rather than pasting the literal
+      snippet, since Next.js's script component gets dedup + defer handling a
+      raw tag wouldn't. `siteConfig.googleAnalyticsId` (overridable via
+      `NEXT_PUBLIC_GA_ID`) is the single place the measurement ID lives; wired
+      the same env var through `Dockerfile`'s build `ARG`, `docker-compose.yml`,
+      and `.env.example` so it's actually configurable in the Docker build,
+      not just locally. Verified in rendered HTML: both script tags present
+      with the correct measurement ID.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card

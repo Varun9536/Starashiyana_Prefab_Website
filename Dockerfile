@@ -21,6 +21,8 @@ ENV NEXT_TELEMETRY_DISABLED=1
 # with `docker build --build-arg NEXT_PUBLIC_SITE_URL=https://staging.example.com`.
 ARG NEXT_PUBLIC_SITE_URL=https://starashiyanaprefab.com
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_GA_ID=G-KN3MMQENDP
+ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
 
 RUN npm run build
 
