@@ -1,5 +1,8 @@
+"use client";
+
 import { Reveal } from "@/components/ui/Reveal";
 import { siteConfig } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
 import { QuoteForm } from "./QuoteForm";
 import styles from "./Contact.module.css";
 
@@ -19,7 +22,12 @@ export function Contact() {
             <div>
               <div className={styles.detailLabel}>Email</div>
               <div className={styles.detailValue}>
-                <a href={`mailto:${siteConfig.contact.email}`}>{siteConfig.contact.email}</a>
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  onClick={() => trackEvent("contact_click", { method: "email", location: "contact_section" })}
+                >
+                  {siteConfig.contact.email}
+                </a>
               </div>
             </div>
           </div>
@@ -28,9 +36,19 @@ export function Contact() {
             <div>
               <div className={styles.detailLabel}>Phone / WhatsApp</div>
               <div className={styles.detailValue}>
-                <a href={`tel:${siteConfig.contact.phoneHref}`}>{siteConfig.contact.phoneDisplay}</a>
+                <a
+                  href={`tel:${siteConfig.contact.phoneHref}`}
+                  onClick={() => trackEvent("contact_click", { method: "call", location: "contact_section" })}
+                >
+                  {siteConfig.contact.phoneDisplay}
+                </a>
                 &nbsp;·&nbsp;
-                <a href={siteConfig.contact.whatsappHref} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={siteConfig.contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent("contact_click", { method: "whatsapp", location: "contact_section" })}
+                >
                   Message on WhatsApp
                 </a>
               </div>
@@ -55,7 +73,10 @@ export function Contact() {
             <div>
               <div className={styles.detailLabel}>Company Profile</div>
               <div className={styles.detailValue}>
-                <a href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent("Request: Company Profile PDF")}`}>
+                <a
+                  href={`mailto:${siteConfig.contact.email}?subject=${encodeURIComponent("Request: Company Profile PDF")}`}
+                  onClick={() => trackEvent("contact_click", { method: "email_profile_request", location: "contact_section" })}
+                >
                   Request the PDF by email →
                 </a>
               </div>

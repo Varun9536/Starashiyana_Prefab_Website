@@ -8,6 +8,7 @@ import { primaryNavLinks } from "@/config/navigation";
 import { Navbar } from "@/components/navigation/Navbar";
 import { MobileMenuTrigger, MobileMenuDrawer } from "@/components/navigation/MobileMenu";
 import { Button } from "@/components/ui/Button";
+import { trackEvent } from "@/lib/analytics";
 import styles from "./Header.module.css";
 
 /**
@@ -28,7 +29,12 @@ export function Header() {
         <Navbar links={primaryNavLinks} />
 
         <div className={styles.navCta}>
-          <Button href="#contact" variant="primary" className={styles.ctaDesktopOnly}>
+          <Button
+            href="#contact"
+            variant="primary"
+            className={styles.ctaDesktopOnly}
+            onClick={() => trackEvent("cta_click", { location: "header" })}
+          >
             Request a Quote
           </Button>
           <MobileMenuTrigger open={menuOpen} onToggle={() => setMenuOpen((prev) => !prev)} />

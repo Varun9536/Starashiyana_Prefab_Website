@@ -2,6 +2,7 @@
 
 import type { NavLink } from "@/config/navigation";
 import { Button } from "@/components/ui/Button";
+import { trackEvent } from "@/lib/analytics";
 import { cx } from "@/lib/utils";
 import styles from "./MobileMenu.module.css";
 
@@ -42,7 +43,15 @@ export function MobileMenuDrawer({
 
   return (
     <nav id="mobile-nav" aria-label="Mobile" className={styles.drawer}>
-      <Button href="#contact" variant="primary" className={styles.cta} onClick={onLinkClick}>
+      <Button
+        href="#contact"
+        variant="primary"
+        className={styles.cta}
+        onClick={() => {
+          trackEvent("cta_click", { location: "mobile_menu" });
+          onLinkClick();
+        }}
+      >
         Request a Quote
       </Button>
       {links.map((link) => (

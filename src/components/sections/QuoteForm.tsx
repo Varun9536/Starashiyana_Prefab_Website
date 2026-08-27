@@ -3,6 +3,7 @@
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { siteConfig } from "@/config/site";
+import { trackEvent } from "@/lib/analytics";
 import styles from "./QuoteForm.module.css";
 
 const PROJECT_TYPES = [
@@ -34,6 +35,13 @@ function handleSubmit(event: FormEvent<HTMLFormElement>) {
     `Location: ${data.get("location") ?? ""}`,
     `Project Requirements: ${data.get("requirements") ?? ""}`,
   ].join("\n");
+
+  // GA4's recommended "generate_lead" event — the single most important
+  // signal on the whole site: a visitor filled out and submitted the form.
+  trackEvent("generate_lead", {
+    project_type: data.get("project") || undefined,
+    location: data.get("location") || undefined,
+  });
 
   window.location.href = `mailto:${siteConfig.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }

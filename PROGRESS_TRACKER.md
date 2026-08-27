@@ -453,6 +453,38 @@ Last updated: 2026-08-25
       was being reused, giving this section a distinct image. Build + lint
       clean.
 
+- [x] 2026-08-27 — GA4 click/conversion event tracking (client asked for
+      "better monitoring" now that GA4 itself was in place — this is the
+      same work proposed earlier in the lead-tracking discussion, paused
+      then, now given the go-ahead). New `src/lib/analytics.ts` —
+      `trackEvent(action, params)`, a thin safe wrapper around `window.gtag`
+      (no-ops if gtag hasn't loaded / SSR). Wired into:
+      - `FloatingActions.tsx` and `Contact.tsx` — `contact_click` with a
+        `method` param (`whatsapp` / `call` / `email` / `email_profile_request`)
+        and a `location` param, on every WhatsApp/Call/Email link on the site
+        (floating buttons + the contact-info panel).
+      - `QuoteForm.tsx` — **`generate_lead`** on submit (GA4's own
+        recommended event name for this exact purpose, with `project_type`
+        and `location` params pulled from the form) — this is the single
+        most important event on the site and the one worth marking as a
+        **Conversion** in the GA4 admin UI (Admin → Events → toggle
+        "Mark as conversion" next to `generate_lead` — can't be done from
+        code, it's a GA4 dashboard setting).
+      - `Header.tsx` and `MobileMenu.tsx` — `cta_click` on the "Request a
+        Quote" button (`location`: `header` / `mobile_menu`) — upper-funnel
+        intent signal distinct from an actual submission.
+      Contact.tsx had to become a client component for the onClick handlers
+      (was a server component) — same tradeoff already accepted for
+      Header/FloatingActions.
+      **Important limit to be upfront about**: this gives event *counts*
+      (how many WhatsApp clicks this week, how many leads generated) broken
+      down by method/location — not who clicked, consistent with everything
+      already explained to the client about what a website can and can't
+      track for WhatsApp/calls specifically.
+      Verified the event name strings actually reached the compiled client
+      JS chunks (`generate_lead`, `contact_click`, `cta_click` all found in
+      `.next/static/chunks/*.js`). Build + lint clean.
+
 ## Known follow-ups (not blockers, flagged for the client/designer)
 - **Set up a Google Business Profile** (business.google.com) — this, not
   on-page schema, is what actually produces the "knowledge panel"/map-card
