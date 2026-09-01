@@ -3,8 +3,12 @@ import QRCode from "qrcode";
 /** Brand colors so the printed QR still reads as part of the card design. */
 const QR_COLORS = { dark: "#45484b", light: "#00000000" };
 
-export function buildCardUrl(siteUrl: string): string {
-  return new URL("/connect", siteUrl).toString();
+export function buildCardPath(slug?: string): string {
+  return slug ? `/connect/${slug}` : "/connect";
+}
+
+export function buildCardUrl(siteUrl: string, slug?: string): string {
+  return new URL(buildCardPath(slug), siteUrl).toString();
 }
 
 export function generateQrPng(url: string): Promise<Buffer> {

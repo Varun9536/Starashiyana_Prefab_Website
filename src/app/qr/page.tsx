@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { connectCard as card } from "@/config/connectCard";
-import { ShareCardPage } from "../ShareCardPage";
+import { ShareCardPage } from "../connect/ShareCardPage";
 
 export const metadata: Metadata = {
-  title: "Share Digital Card",
+  title: "QR Code",
   robots: { index: false, follow: false },
 };
 
-export default function SharePage() {
+export default function QrPage() {
   return <ShareCardPage card={card} qrImagePath="/connect/qr" />;
 }

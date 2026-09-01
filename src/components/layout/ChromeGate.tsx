@@ -7,7 +7,7 @@ import { FloatingActions } from "./FloatingActions";
 
 // The digital business card is a standalone page that doesn't belong inside
 // the main marketing site's chrome.
-const CHROMELESS_PREFIXES = ["/connect"];
+const CHROMELESS_PREFIXES = ["/connect", "/qr"];
 
 export function ChromeGate({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
