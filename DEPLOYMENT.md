@@ -86,6 +86,15 @@ docker compose up -d
 (see `.env.example`) — if it ever needs to change, edit `.env` and rebuild;
 restarting the container alone won't pick it up.
 
+## Digital business card (`/connect`)
+
+The QR code printed on the physical card, and the link shared on WhatsApp/
+Instagram/Facebook, both point at the fixed URL
+`https://starashiyanaprefab.com/connect` — reprint or reshare is never
+needed. The details shown there (name, phone, email, etc.) live in
+`src/config/connectCard.ts`, not a database — to change one, edit that file
+and redeploy like any other code change.
+
 ## Rolling back
 
 ```bash

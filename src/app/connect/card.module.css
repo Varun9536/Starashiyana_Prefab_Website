@@ -1,0 +1,222 @@
+/* Mobile-first, matching the reference design 1:1 up to tablet width — the
+   card fills the screen edge-to-edge, same as scanning it on a phone. */
+.outer {
+  min-height: 100vh;
+  background: #f5f1e8;
+}
+
+.page {
+  max-width: 430px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 25px 30px;
+  background: linear-gradient(180deg, #faf7f0, #f5f1e8);
+  color: #45484b;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Tablet and laptop: instead of stretching or leaving bare margins, the card
+   becomes a centered, shadowed panel on a matching-tone background — reads
+   as deliberately designed at every size, not just "not broken" on desktop. */
+@media (min-width: 560px) {
+  .outer {
+    padding: 56px 20px;
+  }
+  .page {
+    min-height: auto;
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(35, 38, 31, 0.14);
+  }
+}
+
+.top {
+  text-align: center;
+}
+
+.logoWrap {
+  width: 210px;
+  max-width: 78%;
+  margin: 0 auto 18px;
+}
+
+.logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.role {
+  margin: 8px 0 5px;
+  color: #576447;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.company {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: #74776f;
+  text-transform: uppercase;
+}
+
+.rule {
+  height: 1px;
+  background: #45484b20;
+  margin-top: 27px;
+}
+
+.qrWrap {
+  margin: 30px auto 0;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid #e3ded1;
+  border-radius: 14px;
+  width: 240px;
+  max-width: 100%;
+}
+
+.qrImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.linkBox {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: #eee9df;
+  border: 1px solid #d5d0c5;
+  border-radius: 8px;
+  font-size: 13px;
+  word-break: break-all;
+}
+
+.item {
+  padding: 17px 0;
+  border-bottom: 1px solid #45484b20;
+}
+
+.label {
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #72766e;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.value,
+.value a {
+  font-size: 14px;
+  color: #45484b;
+  text-decoration: none;
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.copyWrap {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.copyBtn {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #96998f;
+  cursor: pointer;
+  font-family: inherit;
+}
+.copyBtn:hover {
+  color: #576447;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.btn {
+  min-height: 48px;
+  border: 1px solid #d5d0c5;
+  border-radius: 7px;
+  background: #eee9df;
+  color: #45484b;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.btnGold {
+  background: #576447;
+  border-color: #576447;
+  color: #faf7f0;
+}
+
+.social {
+  text-align: center;
+  margin-top: 27px;
+}
+
+.socialTitle {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: #72766e;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.socialLinks {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.socialLinks a {
+  color: #45484b;
+  text-decoration: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.note {
+  text-align: center;
+  color: #7b7b72;
+  font-size: 10px;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: #7a7b73;
+}
+.footer b {
+  color: #576447;
+}

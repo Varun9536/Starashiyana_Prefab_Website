@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Oswald, Inter, JetBrains_Mono } from "next/font/google";
 import { siteConfig } from "@/config/site";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { FloatingActions } from "@/components/layout/FloatingActions";
+import { ChromeGate } from "@/components/layout/ChromeGate";
 import { GoogleAnalytics } from "@/components/layout/GoogleAnalytics";
 import "./globals.css";
 
@@ -140,10 +138,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <GoogleAnalytics measurementId={siteConfig.googleAnalyticsId} />
         <JsonLd data={organizationJsonLd} />
         <JsonLd data={websiteJsonLd} />
-        <Header />
-        <main>{children}</main>
-        <Footer />
-        <FloatingActions />
+        <ChromeGate>{children}</ChromeGate>
       </body>
     </html>
   );
