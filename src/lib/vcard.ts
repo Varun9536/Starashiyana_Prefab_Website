@@ -20,6 +20,7 @@ export function buildVCard(card: ConnectCard): string {
   if (card.designation) lines.push(`TITLE:${escapeVCardText(card.designation)}`);
   if (card.phone) lines.push(`TEL;TYPE=CELL,VOICE:${escapeVCardText(card.phone)}`);
   if (card.email) lines.push(`EMAIL:${escapeVCardText(card.email)}`);
+  if (card.emailSecondary) lines.push(`EMAIL:${escapeVCardText(card.emailSecondary)}`);
   if (card.website) lines.push(`URL:${escapeVCardText(card.website)}`);
   if (card.factoryAddress) lines.push(`ADR;TYPE=WORK:;;${escapeVCardText(card.factoryAddress)};;;;`);
 

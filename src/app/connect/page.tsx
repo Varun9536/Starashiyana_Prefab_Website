@@ -68,6 +68,13 @@ export default function ConnectPage() {
                 <a href={`mailto:${card.email}`}>{card.email}</a>
               </CopyableValue>
             </div>
+            {card.emailSecondary && (
+              <div className={styles.value} style={{ marginTop: 8 }}>
+                <CopyableValue value={card.emailSecondary}>
+                  <a href={`mailto:${card.emailSecondary}`}>{card.emailSecondary}</a>
+                </CopyableValue>
+              </div>
+            )}
           </div>
         )}
 

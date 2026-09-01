@@ -12,6 +12,7 @@ export const connectCard = {
   phone: "+918285976527",
   whatsappPhone: "+918285976527",
   email: "premi.tanishq@gmail.com",
+  emailSecondary: "starashiyana.prefab@gmail.com",
   website: "https://www.starashiyanaprefab.com/",
   factoryAddress:
     "Khewat No. 138, Khatoni No. 139, Kila No. 16, Rajpura, Near Alamgirpur, Dharuhera, District Rewari, Haryana – 123110, India",
