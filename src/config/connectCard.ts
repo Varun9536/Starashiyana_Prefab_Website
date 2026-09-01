@@ -48,7 +48,7 @@ export const connectCards = {
     phone: "+919810292910",
     whatsappPhone: "+919810292910",
     email: "premi.starashiyana@gmail.com",
-    emailSecondary: "",
+    emailSecondary: "starashiyana.prefab@gmail.com",
     website: "https://www.starashiyanaprefab.com/",
     factoryAddress:
       "Khewat No. 138, Khatoni No. 139, Kila No. 16, Rajpura, Near Alamgirpur, Dharuhera, District Rewari, Haryana - 123110, India",
@@ -66,7 +66,7 @@ export const connectCards = {
     phone: "+919871615571",
     whatsappPhone: "+919871615571",
     email: "tushar.starashiyana@gmail.com",
-    emailSecondary: "",
+    emailSecondary: "starashiyana.prefab@gmail.com",
     website: "https://www.starashiyanaprefab.com/",
     factoryAddress:
       "Khewat No. 138, Khatoni No. 139, Kila No. 16, Rajpura, Near Alamgirpur, Dharuhera, District Rewari, Haryana - 123110, India",
