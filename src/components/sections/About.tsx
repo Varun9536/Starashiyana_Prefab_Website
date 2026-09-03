@@ -53,6 +53,7 @@ export function About() {
               alt=""
               fill
               className={styles.visualImage}
+              quality={65}
               sizes="(max-width: 900px) 100vw, 45vw"
             />
             <div className={styles.badge}>

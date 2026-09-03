@@ -15,6 +15,7 @@ export function Hero() {
           fill
           className={styles.frameBgImage}
           priority
+          quality={65}
           sizes="(max-width: 980px) 100vw, 72vw"
         />
       </div>
@@ -26,6 +27,8 @@ export function Hero() {
             alt=""
             fill
             className={styles.factoryHeroPhotoImage}
+            priority
+            quality={65}
             sizes="(max-width: 980px) 100vw, 68vw"
           />
         </div>

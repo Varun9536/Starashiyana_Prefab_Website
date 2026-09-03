@@ -23,7 +23,14 @@ export function Header() {
     <header id="site-header" className={styles.header}>
       <div className={styles.navWrap}>
         <a href="#top" className={styles.logoMark} aria-label={`${siteConfig.name} home`}>
-          <Image src={logo} alt={`${siteConfig.name} logo`} className={styles.logo} priority />
+          <Image
+            src={logo}
+            alt={`${siteConfig.name} logo`}
+            className={styles.logo}
+            priority
+            width={230}
+            height={188}
+          />
         </a>
 
         <Navbar links={primaryNavLinks} />

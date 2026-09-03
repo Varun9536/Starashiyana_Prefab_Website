@@ -1,10 +1,10 @@
 import type { StaticImageData } from "next/image";
-import machineShearing from "@/assets/images/machines/machine_shearing.png";
+import machineShearing from "@/assets/images/machines/machine_shearing.webp";
 import processPlasma from "@/assets/images/process/process_plasma.jpg";
-import machinePtw from "@/assets/images/machines/machine_ptw.png";
+import machinePtw from "@/assets/images/machines/machine_ptw.webp";
 import processDrilling from "@/assets/images/process/process_drilling.jpg";
-import machinePowerPress from "@/assets/images/machines/machine_power_press.png";
-import machineThreading from "@/assets/images/machines/machine_threading.png";
+import machinePowerPress from "@/assets/images/machines/machine_power_press.webp";
+import machineThreading from "@/assets/images/machines/machine_threading.webp";
 import factoryGalleryHero from "@/assets/images/hero/factory_gallery_hero.jpg";
 import processBlast from "@/assets/images/process/process_blast.jpg";
 

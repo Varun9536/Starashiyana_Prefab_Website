@@ -14,7 +14,13 @@ export function Footer() {
         <div className={styles.grid}>
           <div>
             <div className={styles.logoWrap}>
-              <Image src={logo} alt={`${siteConfig.name} logo`} className={styles.logo} />
+              <Image
+                src={logo}
+                alt={`${siteConfig.name} logo`}
+                className={styles.logo}
+                width={340}
+                height={278}
+              />
             </div>
             <p className={styles.blurb}>
               An independent PEB company built by engineers and project professionals who have spent years on real
